@@ -15,20 +15,23 @@ function PanApp() {
 	const handlePanChange = event => {
 		let val = event.target.value 
 		if (val.length == 10) {
-			setPan('Success')
-			axios
-			.get("https://catfact.ninja/fact")
-			.then(function (response) {
-				console.log(response.data)
-				setStatus(response.data.fact);
-			});
-
+			setPan('Success ! Valid PAN Number')
+			axios.post('http://127.0.0.1:8000/panverify/', {
+				panId: {val},
+			  })
+			  .then(function (response) {
+				console.log(response['data'])
+				setStatus(response['data']);
+			  })
+			  .catch(function (error) {
+				console.log(error);
+			  });
 		}
 		else{
 			setPan('Enter a 10 Digit valid PAN Number')
 			setStatus('');
 		}
-
+		
 	  };
 
   return (
@@ -44,23 +47,28 @@ function PanApp() {
 		</Toolbar>
 	</AppBar>
 
-	<form className='myForm' autoComplete="off">
-      <div className='field'>
+      <div className='myForm'>
 		<Typography variant="h6" >
 			Please Enter your Pan Number 
 		</Typography>
 		<TextField 
-		fullWidth 
+		fullWidth
+		className='panId' 
 		onChange={handlePanChange} 
 		label="Pan Number" 
 		variant="filled" 
 		color="primary" 
 		focused />
 		<h3>{pan}</h3>
-		<h2>{status}</h2>
+		{/* <div><h2>{JSON.stringify(status)}</h2></div> */}
       </div>
-    </form>
+		<div className='resp'>
 
+		{Object.entries(status).map(([key,val]) => (
+			<h3 style={ {color : "green" }}  key={key}><strong>{key}</strong>: {JSON.stringify(val)}</h3>
+		))}
+		
+		</div>
     </div>
   );
 }
