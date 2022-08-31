@@ -29,5 +29,30 @@ def panverify(request):
     
         return HttpResponse(response)
     
-    return HttpResponse('Invalid Url')
+    return HttpResponse('Invalid URL ! No GET Method Available ')
+
+@api_view(['GET', 'POST'])
+@csrf_exempt
+def banverify(request):
+    response = ''
+    if request.method == "POST":
+        data = json.loads(request.body.decode('utf-8'))
+        print(data)
+        banifsc   = data['banIfsc']
+        bannumber = data['banId']
+        url = "https://dg-sandbox.setu.co/api/verify/ban"
+        headers = {
+            "Content-Type": "application/json; charset=utf-8",
+            "x-client-id": "b1e41b18-da3a-4c31-b3f6-4449b1863883",
+            "x-client-secret": "d888f103-d1c2-44c0-a78b-da04844e7282"
+        }
+        data = { 
+        "ifsc": f'{banifsc}',
+        "accountNumber": f'{bannumber}' 
+        } 
+        response = requests.post(url, headers=headers, json=data)
+    
+        return HttpResponse(response)
+    
+    return HttpResponse('Invalid URL ! No GET Method Available ')
 

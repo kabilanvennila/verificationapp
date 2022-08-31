@@ -21,7 +21,9 @@ In the project directory, you can run:
 #### `python3 manage.py runserver`
 
 Runs the app in the development mode.
-API ENDPOINT : [http://127.0.0.1:8000/panverify/](http://127.0.0.1:8000/panverify/)
+
+PAN API ENDPOINT : [http://127.0.0.1:8000/panverify/](http://127.0.0.1:8000/panverify/)
+BANK API ENDPOINT : [http://127.0.0.1:8000/banverify/](http://127.0.0.1:8000/banverify/)
 
 <hr>
 <h2><strong>Sample Design</strong></h2>
