@@ -8,19 +8,21 @@ import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 const axios = require('axios');
 
-function PanApp() {
+function BanApp() {
 
-	const [pan, setPan] = useState('');
+	const [ban, setBan] = useState('');
+    const [ifsc, setIfsc] = useState('');
 	const [status, setStatus] = useState('');
-	const handlePanChange = event => {
+	const handleBanChange = event => {
 		let val = event.target.value 
-		if (val.length == 10) {
-			setPan('Success ! Valid PAN Number')
-			axios.post('http://127.0.0.1:8000/panverify/', {
-				panId: {val},
+		if (val.length == 10 && ifsc.length == 11) {
+			setBan('Success ! Valid Bank and IFSC Number')
+			axios.post('http://127.0.0.1:8000/banverify/', {
+				BanId: {val},
+                BanIfsc : {ifsc}
 			  })
 			  .then(function (response) {
-				console.log(response['data'])
+				console.log(response)
 				setStatus(response['data']);
 			  })
 			  .catch(function (error) {
@@ -28,8 +30,19 @@ function PanApp() {
 			  });
 		}
 		else{
-			setPan('Enter a 10 Digit valid PAN Number')
+			setBan('Enter a 10 Digit valid Bank Number and IFSC code')
 			setStatus('');
+		}
+		
+	  };
+
+      const handleIfscChange = event => {
+		let val = event.target.value 
+		if (val.length == 11) {
+			setIfsc(val)
+		}
+		else{
+			setIfsc('Enter a 11 Digit valid IFSC Number')
 		}
 		
 	  };
@@ -42,25 +55,37 @@ function PanApp() {
 			<a href='/'><img src='https://avatars.githubusercontent.com/u/70563105?s=200&v=4' className='logo'></img></a>
 			</IconButton>
 			<Typography variant="h6" >
-			SETU - PAN Verification App
+			SETU - Bank Account Verification App
 			</Typography>
 		</Toolbar>
 	</AppBar>
-	<img style={{width: "20%" , height:"20%" ,paddingLeft:"600px"} } src="https://586544-1899780-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/2020/02/instant-pan-card-aadhaar.png">
+    <img style={{width: "20%" , height:"20%" ,paddingLeft:"700px"} } src="https://cdn4.iconfinder.com/data/icons/loan-money-blue-line/64/128_bank-banking-money-finance-dollar-512.png">
     </img>
       <div className='myForm'>
-		<Typography variant="h6" >
-			Please Enter your Pan Number 
+      <Typography variant="h6" >
+			Please Enter your IFSC Number 
 		</Typography>
 		<TextField 
 		fullWidth
-		className='panId' 
-		onChange={handlePanChange} 
-		label="Pan Number" 
+		className='ifscId' 
+		onChange={handleIfscChange} 
+		label="Ifsc Number" 
 		variant="filled" 
 		color="primary" 
 		focused />
-		<h3>{pan}</h3>
+        <h3 style={{paddingTop:"60px"}}></h3>
+		<Typography variant="h6" >
+			Please Enter your Bank Account Number 
+		</Typography>
+		<TextField 
+		fullWidth
+		className='BanId' 
+		onChange={handleBanChange} 
+		label="Bank  Number" 
+		variant="filled" 
+		color="primary" 
+		focused />
+		<h3>{ban}</h3>
 		{/* <div><h2>{JSON.stringify(status)}</h2></div> */}
       </div>
 		<div className='resp'>
@@ -74,4 +99,4 @@ function PanApp() {
   );
 }
 
-export default PanApp;
+export default BanApp;

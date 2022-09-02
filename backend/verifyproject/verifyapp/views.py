@@ -38,8 +38,8 @@ def banverify(request):
     if request.method == "POST":
         data = json.loads(request.body.decode('utf-8'))
         print(data)
-        banifsc   = data['banIfsc']
-        bannumber = data['banId']
+        banifsc   = data['BanIfsc']['ifsc']
+        bannumber = data['BanId']['val']
         url = "https://dg-sandbox.setu.co/api/verify/ban"
         headers = {
             "Content-Type": "application/json; charset=utf-8",
