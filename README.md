@@ -12,6 +12,12 @@ In the project directory, you can run :
 Runs the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+#### Available Routes
+⭐️ / - Home
+⭐️ /panapp - Pan Verification
+⭐️ /banapp - Bank Verification
+Note : Any other URL patterns are automatically redirected to the Route '/'
+
 ## To setup Backend
 In the project directory, you can run:
 
@@ -19,11 +25,11 @@ In the project directory, you can run:
 #### `python3 makemigrations`
 #### `python3 migrate`
 #### `python3 manage.py runserver`
-
 Runs the app in the development mode.
 
-PAN API ENDPOINT : [http://127.0.0.1:8000/panverify/](http://127.0.0.1:8000/panverify/)
-BANK API ENDPOINT : [http://127.0.0.1:8000/banverify/](http://127.0.0.1:8000/banverify/)
+#### Available API Endpoint
+⭐️ PAN API ENDPOINT - [http://127.0.0.1:8000/panverify/](http://127.0.0.1:8000/panverify/)
+⭐️ BANK API ENDPOINT - [http://127.0.0.1:8000/banverify/](http://127.0.0.1:8000/banverify/)
 
 <hr>
 <h2><strong>Sample Design</strong></h2>
